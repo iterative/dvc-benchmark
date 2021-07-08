@@ -59,3 +59,14 @@ class DVCIgnoreBench(DVCStatusBench):
     def setup(self):
         super().setup()
         self.add_ignore_rules(self.test_directory.name, 30)
+
+
+class DVCIgnoreSubrepoBench(DVCIgnoreBench):
+    @staticmethod
+    def add_subrepo(path, number):
+        for i in range(number):
+            os.makedirs(os.path.join(path, str(i), ".dvc"), exist_ok=True)
+
+    def setup(self):
+        super().setup()
+        self.add_subrepo(self.test_directory.name, 10)
